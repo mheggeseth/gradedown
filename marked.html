@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.js"></script>
+</head>
+<body>
+
+<textarea style="display:none;">
+| | |
+|-|-|
+|{colspan:3}whole row|
+</textarea>
+
+  <div id="content"></div>
+	<textarea id="markup"></textarea>
+  <script>
+    var renderer = new marked.Renderer();
+    marked.setOptions({ renderer: renderer });
+    var oldTable = renderer.table;
+    renderer.table = function(header,body)
+    {
+			return oldTable.apply(renderer,[header,body]);
+    }
+    var oldTableRow = renderer.tablerow;
+    renderer.tablerow = function(content)
+    {
+			return oldTableRow.apply(renderer,[content]);
+    }
+    var oldTableCell = renderer.tablecell;
+    renderer.tablecell = function(content,flags)
+    {
+			return oldTableCell.apply(renderer,[content,flags]);
+    }
+    
+    var mdElement = document.getElementsByTagName('textarea')[0];
+    var markup = marked(mdElement.textContent || mdElement.innerText);
+    document.getElementById('content').innerHTML = markup;
+    document.getElementById('markup').innerHTML = markup;
+  </script>
+</body>
+</html>
