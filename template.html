@@ -3,18 +3,35 @@
 <head>
   <meta charset="utf-8"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.js"></script>
-  <script src="https://mheggeseth.github.io/gradedown/renderer.js"></script>
+  <script src="renderer.js"></script>
 </head>
 <body>
 
 <textarea style="display:none;">
-| | |
-|-|-|
+### Title of Thing
+
+Description paragraph 1
+
+* maybe an
+* unordered list
+
+Description paragraph 2
+
+1. or an
+1. ordered list
+
+| | | |
+|-|-|-|
+|$title$ Input (1 pt)|
+|$subtitle$ A header for this group of deductions|
+| -> Deduction title                    |  -1 | Description of deduction <ul><li>unordered list</li><li>in a description</li><ul> |
 |{colspan:3}whole row|
 </textarea>
 
-  <div id="content"></div>
-	<textarea id="markup"></textarea>
+	<div id="content" style="border: solid 1px black; padding: 5px;"></div>
+	
+	<p>And the HTML...</p>
+	<textarea id="markup" cols="50" rows="10"></textarea>
   <script>
     var mdElement = document.getElementsByTagName('textarea')[0];
     var markup = marked(mdElement.textContent || mdElement.innerText);

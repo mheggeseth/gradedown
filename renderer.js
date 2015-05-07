@@ -16,5 +16,37 @@ renderer.tablerow = function(content)
 var oldTableCell = renderer.tablecell;
 renderer.tablecell = function(content,flags)
 {
-	return oldTableCell.apply(renderer,[content,flags]);
+	var isTitle = content.toLowerCase().indexOf("$title$") === 0;
+	var isSubtitle = content.toLowerCase().indexOf("$subtitle$") === 0;
+	if (isTitle || isSubtitle)
+	{
+		content = content.replace("$title$", "");
+		content = content.replace("$subtitle$", "");
+		content = content.replace(/^\s+/,"");
+		
+		if (isSubtitle)
+		{
+			content = "<em>" + content + "</em>";
+		}
+		content = "<div class=\"SmallSpacerAbove\">" + content + "</div>";
+		content = oldTableCell.apply(renderer,[content,flags]);
+		
+		var container = document.createElement('tr');
+		container.innerHTML = content;
+		
+		var td = container.getElementsByTagName('td')[0];
+		td.colSpan = 3;
+		
+		if (isTitle)
+		{
+			var div = container.getElementsByTagName('div')[0];
+			div.className += " Bold";
+		}
+		
+		return container.innerHTML;
+	}
+	else
+	{
+		return oldTableCell.apply(renderer,[content,flags]);
+	}
 }
