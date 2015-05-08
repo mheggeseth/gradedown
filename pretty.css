@@ -7,6 +7,10 @@ table td
 	padding: 2px 3px;
 	vertical-align: top;
 }
+table tr.Odd td:first-child
+{
+	padding-left: 15px;
+}
 table > tbody > tr.Odd:nth-of-type(odd)
 {
 	background-color: hsl(0, 0%, 90%);
