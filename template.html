@@ -58,7 +58,7 @@ Description paragraph 2
           <div id="content" style="padding: 5px;"></div>
         </div>
         <div role="tabpanel" class="tab-pane" id="html">
-          <textarea id="markup" class="form-control" rows="20" disabled="disabled"></textarea>
+          <pre id="markup"></pre>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ Description paragraph 2
     var mdElement = document.getElementsByTagName('textarea')[0];
     var markup = marked(mdElement.textContent || mdElement.innerText);
     document.getElementById('content').innerHTML = markup;
-    document.getElementById('markup').innerHTML = markup;
+    document.getElementById('markup').innerHTML = $("<div/>").text(markup).html();
   </script>
 </body>
 </html>
