@@ -20,6 +20,8 @@ renderer.tablerow = function(content)
 		//3 cells means it's a deduction row, so add the Odd class
 		var tr = container.getElementsByTagName('tr')[0];
 		tr.className += " Odd";
+		
+		tds[1].className += " Center NoWrap"; //Add deduction classes to second TD
 	}
 
 	return container.innerHTML;
@@ -28,13 +30,14 @@ renderer.tablerow = function(content)
 var oldTableCell = renderer.tablecell;
 renderer.tablecell = function(content,flags)
 {
-	var isTitle = content.toLowerCase().indexOf("$title$") === 0;
-	var isSubtitle = content.toLowerCase().indexOf("$subtitle$") === 0;
-	var isDeductionValue = content.toLowerCase().indexOf("$d$") === 0;
+	var titleMarker = "$ ";
+	var subTitleMarker = "$$ ";
+	var isTitle = content.toLowerCase().indexOf(titleMarker) === 0;
+	var isSubtitle = content.toLowerCase().indexOf(subTitleMarker) === 0;
 	if (isTitle || isSubtitle)
 	{
-		content = content.replace("$title$", "");
-		content = content.replace("$subtitle$", "");
+		if (isTitle) content = content.replace(titleMarker, "");
+		if (isSubtitle) content = content.replace(subTitleMarker, "");
 		content = content.replace(/^\s+/,"");
 		
 		if (isSubtitle)
@@ -57,21 +60,6 @@ renderer.tablecell = function(content,flags)
 		}
 		
 		return container.innerHTML;
-	}
-	else if (isDeductionValue)
-	{
-		content = content.replace("$d$", "");
-		content = content.replace(/^\s+/,"");
-
-		content = oldTableCell.apply(renderer,[content,flags]);
-
-		var container = document.createElement('tr');
-		container.innerHTML = content;
-
-		var td = container.getElementsByTagName('td')[0];
-		td.className += " Center NoWrap";
-		return container.innerHTML;
-		
 	}
 	else
 	{
