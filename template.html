@@ -23,14 +23,15 @@ Description paragraph 2
 
 | | | |
 |-|-|-|
-|$title$ Input (1 pt)|
-|$subtitle$ A header for this group of deductions|
-| -> Deduction title                    |  -1 | Description of deduction <ul><li>unordered list</li><li>in a description</li><ul> |
+|$title$ Section (1 pt)|
+|$subtitle$ Sub-section|
+| Deduction                           |$d$ -1 | Description of sub-deduction <ul><li>unordered list</li><li>in a description</li><ul> |
+| -> Sub-deduction                    |$d$ -1 | Description of sub-deduction |
 </textarea>
 
 	<div id="content" style="border: solid 1px black; padding: 5px;"></div>
 	
-	<p>And the HTML...</p>
+	<p>HTML</p>
 	<textarea id="markup" cols="50" rows="10"></textarea>
   <script>
     var mdElement = document.getElementsByTagName('textarea')[0];
