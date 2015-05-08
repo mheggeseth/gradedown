@@ -1,0 +1,23 @@
+table
+{
+	width:100%;
+}
+table td
+{
+	padding: 2px 3px;
+	vertical-align: top;
+}
+table > tbody > tr.Odd:nth-of-type(odd)
+{
+	background-color: hsl(0, 0%, 90%);
+}
+table .Bold {
+	font-weight: Bold;
+}
+table .SmallSpacerAbove {
+	margin-top: 4px;
+}
+table .Center.NoWrap {
+	text-align: center;
+	white-space: nowrap;
+}
